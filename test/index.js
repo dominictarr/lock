@@ -8,12 +8,16 @@ tape('single lock', function (t) {
   lock('hello', function (release) {
 
     t.equal(lock.isLocked('hello'), true)
-    release(function (_r, _r2) {
+    var _release = release(function (_r, _r2) {
       t.equal(lock.isLocked('hello'), false)
       t.equal(_r, r)
       t.equal(_r2, r2)
       t.end()
-    })(r, r2)
+    })
+    t.equal(lock.isLocked('hello'), true)
+    _release(r, r2)
+    t.equal(lock.isLocked('hello'), false)
+
   })
 
 })
