@@ -33,7 +33,7 @@ lock(['A', 'B', 'C'], function (release) { //called, when ALL
 })
 ```
 
-used in [https://github.com/dominictarr/level-update](level-update)
+used in [level-update](https://github.com/dominictarr/level-update)
 
 ## License
 
