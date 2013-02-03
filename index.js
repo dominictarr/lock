@@ -5,8 +5,8 @@ module.exports = function () {
 
   function _releaser (key, exec) {
     return function (done) {
-      _release(key, exec)
       return function () {
+      _release(key, exec)
       done.apply(null, arguments)
       }
     }
