@@ -13,7 +13,6 @@ module.exports = function () {
   }
 
   function _release (key, exec) {
-    var args = [].slice.call(arguments)
     var i = locked[key].indexOf(exec) //should usually be 0
 
     if(!~i) return
@@ -24,7 +23,7 @@ module.exports = function () {
     //so it's always after the released callback
     if(isLocked(key))
       process.nextTick(function () {
-        locked[key][0](_releaser(key, exec))
+        locked[key][0](_releaser(key, locked[key][0]))
       })
     else
       delete locked[key]
