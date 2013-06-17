@@ -6,10 +6,10 @@
     "type": "git",
     "url": "git://github.com/dominictarr/lock.git"
   },
-  "dependencies": {
-    "tape": "~0.2.2"
+  "dependencies": {},
+  "devDependencies": {
+    "tape": "~0.2.2"    
   },
-  "devDependencies": {},
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
