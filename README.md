@@ -12,7 +12,7 @@ lock('key', function (release) { //called when resource is available.
 
   //do an async operation, and wrap the callback with release.
   someAsyncOperation(args,..., release(function (err) {
-    //'key' is not unlocked!
+    //'key' is now unlocked!
   })
 })
 ```
