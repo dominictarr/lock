@@ -1,4 +1,3 @@
-
 module.exports = function () {
 
   var locked = {}
@@ -7,7 +6,7 @@ module.exports = function () {
     return function (done) {
       return function () {
       _release(key, exec)
-      done.apply(null, arguments)
+      if (done) done.apply(null, arguments)
       }
     }
   }
