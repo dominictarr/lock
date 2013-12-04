@@ -79,3 +79,18 @@ tape('3 locks', function (t) {
   })
 })
 
+tape('lock with optional done', function (t) {
+  var lock = Lock(), released = 0
+
+  lock('what?', function (release) {
+    released = 1
+    process.nextTick(release())
+  })
+
+  lock('what?', function (release) {
+    t.equal(released, 1, 'first lock should be completely released')
+    release(function () {
+      t.end()
+    })()
+  })
+})
