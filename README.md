@@ -33,6 +33,18 @@ lock(['A', 'B', 'C'], function (release) { //called, when ALL
 })
 ```
 
+## Lock with optional callback.
+
+``` js
+var Lock = require('lock');
+var lock = Lock();
+
+lock('cache', function(release) { //called when no one is writing to cache
+	//we do not care if this fails since its a cache so no callback needed
+	fs.writeFile(fileCache, ... , release())
+})
+```
+
 used in [level-update](https://github.com/dominictarr/level-update)
 
 ## License
