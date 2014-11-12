@@ -44,7 +44,7 @@ module.exports = function () {
           var args = [].slice.call(arguments)
           for(var key in l)
             _release(key, l[key])
-          done.apply(this, args)
+          if (done) done.apply(this, args)
         }
       }
 
