@@ -1,4 +1,7 @@
+
 module.exports = function () {
+
+  var next = typeof setImmediate === 'undefined' ? setTimeout : setImmediate
 
   var locked = {}
 
@@ -21,7 +24,7 @@ module.exports = function () {
     //note, that the next locker isn't triggered until next tick,
     //so it's always after the released callback
     if(isLocked(key))
-      setImmediate(function () {
+      next(function () {
         locked[key][0](_releaser(key, locked[key][0]))
       })
     else
