@@ -5,4 +5,4 @@ interface lock {
   (key: string | string[], exec: exec): void;
   isLocked(): boolean;
 }
-declare function Lock(): lock
+declare function Lock(): lock;
