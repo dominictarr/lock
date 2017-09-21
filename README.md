@@ -5,7 +5,7 @@ lock asynchronous resources.
 ## Simple Example
 
 ``` js
-var Lock = require('lock')
+var Lock = require('lock').Lock
 var lock = Lock()
 
 lock('key', function (release) { //called when resource is available.
@@ -20,7 +20,7 @@ lock('key', function (release) { //called when resource is available.
 ## Multiple Locks at Once.
 
 ``` js
-var Lock = require('lock')
+var Lock = require('lock').Lock
 var lock = Lock()
 
 lock(['A', 'B', 'C'], function (release) { //called, when ALL
@@ -36,8 +36,8 @@ lock(['A', 'B', 'C'], function (release) { //called, when ALL
 ## Lock with optional callback.
 
 ``` js
-var Lock = require('lock');
-var lock = Lock();
+var Lock = require('lock').Lock
+var lock = Lock()
 
 lock('cache', function(release) { //called when no one is writing to cache
 	//we do not care if this fails since its a cache so no callback needed
