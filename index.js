@@ -1,5 +1,4 @@
-
-module.exports = function () {
+function Lock () {
 
   var next = typeof setImmediate === 'undefined' ? setTimeout : setImmediate
 
@@ -80,3 +79,5 @@ module.exports = function () {
 
   return lock
 }
+
+module.exports.Lock = Lock
