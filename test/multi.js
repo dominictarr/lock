@@ -58,3 +58,19 @@ tape('wait for a single lock', function (t) {
     })()
   })
 })
+
+tape('multiple locks with optional done', function (t) {
+  var lock = Lock(), released = 0
+
+  lock(['a', 'b'], function (release) {
+    released = 1
+    process.nextTick(release())
+  })
+
+  lock(['a', 'b'], function (release) {
+    t.equal(released, 1, 'first lock should be completely released')
+    release(function () {
+      t.end()
+    })()
+  })
+})
