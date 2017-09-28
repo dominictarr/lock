@@ -1,5 +1,5 @@
 var tape = require('tape')
-var Lock = require('../')
+var Lock = require('../').Lock
 
 tape('single lock', function (t) {
 
