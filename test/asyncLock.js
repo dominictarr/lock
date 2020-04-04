@@ -23,6 +23,27 @@ tape('async lock using promise', function (t) {
   })
 })
 
+tape('should not hang if duplicate keys are present in multilock', function(t){
+  const lock     = AsyncLock()
+  const allLocks = [
+    ['key1', 'key2', "key1"],
+    ['key3', 'key1'],
+    ['key4', 'key5'],
+    ['key1', 'key2', 'key3']
+  ]
+
+  const result = []
+  const promises = []
+  for (let i = 0; i < allLocks.length; i++) {
+    promises.push(lock(allLocks[i], () => execute(i)).then(response => result.push(i)))
+  }
+
+  Promise.all(promises).then(()=>{
+    t.equal(result.join(','), '0,2,1,3')
+    t.end()
+  })
+})
+
 async function execute(index) {
   await delay(5)
   return index
