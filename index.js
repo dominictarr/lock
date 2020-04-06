@@ -80,4 +80,21 @@ function Lock () {
   return lock
 }
 
-module.exports.Lock = Lock
+function AsyncLock() {
+  const _lock = Lock()
+  const fn    = async function (locks, exec) {
+    let result
+    const promise = new Promise((resolve, reject) => result = {resolve, reject})
+    const unique  = [...new Set(locks)].sort()
+    _lock(unique, function (release) {
+      exec().then(result.resolve)
+        .catch(result.reject)
+        .finally(() => release(function (err) { if (err) result.reject(err) })())
+    })
+    return promise
+  }
+  fn.isLocked = _lock.isLocked
+  return fn
+}
+
+module.exports = {Lock: Lock, AsyncLock: AsyncLock}

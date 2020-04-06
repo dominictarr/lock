@@ -47,6 +47,20 @@ lock('cache', function(release) { //called when no one is writing to cache
 
 used in [level-update](https://github.com/dominictarr/level-update)
 
+## promisified Lock
+```javascript
+const {AsyncLock}   = require('lock')
+const lock = AsyncLock()
+lock(['A', 'B', 'C'], function(){
+    //do an async operation
+    return someAsyncOperation(args)
+    
+}).then(function(result){
+  //A, B & C are now unlocked!
+}).catch(function(e){ 
+// error thrown by someAsyncOperation(args) 
+})
+```
 ## License
 
 MIT
